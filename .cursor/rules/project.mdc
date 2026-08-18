@@ -1,0 +1,44 @@
+---
+description: Agency website project context
+alwaysApply: true
+---
+
+# Agency Website
+
+## Goal
+Create a premium digital agency landing page.
+
+## Stack
+- Vue 3 (Composition API, `<script setup>`)
+- Vite
+- TypeScript
+- Tailwind CSS
+
+## Main positioning
+Build. Grow. Automate.
+
+## Services
+1. Software & Digital Solutions
+2. AI & Automation
+3. Digital Marketing
+4. Content & Branding
+
+## Design
+- Premium, modern, minimal, technology-focused
+- Mobile first — design for small screens, then scale up
+- Generous whitespace, clear visual hierarchy
+- Subtle motion/transitions welcome, avoid anything gimmicky
+
+## Component conventions
+- One component per file, PascalCase filenames (e.g. `HeroSection.vue`)
+- Section-level components live in `src/components/sections`
+- Reusable UI primitives (buttons, cards, etc.) live in `src/components/ui`
+- Keep components small and composable — no giant monolithic page files
+
+## Rules
+- Mobile first
+- Reusable components
+- No unnecessary dependencies — check before adding a new package
+- Don't modify unrelated components when working on a specific section
+- Accessibility: semantic HTML, alt text on images, visible focus states, sufficient color contrast (WCAG AA)
+- SEO: descriptive page title/meta description, semantic heading order (one h1 per page), alt text on images    
