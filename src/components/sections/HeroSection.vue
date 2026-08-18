@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const whatsappSaad = 'https://wa.me/919821733034'
+const visualReveal = useScrollReveal()
 </script>
 
 <template>
   <section
     id="hero"
-    class="relative flex min-h-[calc(100vh-4.5rem)] items-center overflow-hidden"
+    class="relative flex w-full min-h-[calc(100vh-4.5rem)] items-center overflow-hidden"
   >
     <!-- Background -->
     <div
@@ -30,32 +34,43 @@
       aria-hidden="true"
     />
 
-    <div class="relative mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <div class="section-padding section-container relative">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <!-- Content -->
         <div class="text-center lg:text-left">
-          <h1 class="text-4xl font-bold leading-[1.1] tracking-tight text-[var(--text-h)] sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1
+            class="hero-entrance text-4xl font-bold leading-[1.1] tracking-tight text-[var(--text-h)] sm:text-5xl lg:text-6xl xl:text-7xl"
+            style="--hero-delay: 0ms"
+          >
             <span class="font-extrabold">Build.</span>
             <span class="font-medium text-[var(--text)]"> Grow.</span>
             <span class="font-bold text-[var(--accent)]"> Automate.</span>
           </h1>
 
-          <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--text)] sm:text-lg lg:mx-0">
+          <p
+            class="hero-entrance mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--text)] sm:text-lg lg:mx-0"
+            style="--hero-delay: 120ms"
+          >
             We help businesses ship software, harness AI and automation,
             scale digital marketing, and build brands that stand out —
             end to end, with clarity and craft.
           </p>
 
-          <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+          <div
+            class="hero-entrance mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
+            style="--hero-delay: 240ms"
+          >
             <a
-              href="#contact"
-              class="inline-flex w-full items-center justify-center rounded-full bg-[var(--text-h)] px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:w-auto"
+              :href="whatsappSaad"
+              class="btn focus-ring inline-flex w-full items-center justify-center rounded-full bg-[var(--text-h)] px-7 py-3.5 text-sm font-medium text-white hover:bg-[var(--accent)] sm:w-auto"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Start a project
             </a>
             <a
               href="#services"
-              class="inline-flex w-full items-center justify-center rounded-full border border-[var(--border)] bg-white/60 px-7 py-3.5 text-sm font-medium text-[var(--text-h)] backdrop-blur-sm transition-colors hover:border-[var(--accent-border)] hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:w-auto"
+              class="btn focus-ring inline-flex w-full items-center justify-center rounded-full border border-[var(--border)] bg-white/60 px-7 py-3.5 text-sm font-medium text-[var(--text-h)] backdrop-blur-sm hover:border-[var(--accent-border)] hover:text-[var(--accent)] sm:w-auto"
             >
               See our services
             </a>
@@ -64,7 +79,10 @@
 
         <!-- Desktop visual -->
         <div
-          class="relative mx-auto hidden aspect-square w-full max-w-md lg:block lg:max-w-none"
+          :ref="visualReveal.target"
+          class="reveal relative mx-auto hidden aspect-square w-full max-w-md lg:block lg:max-w-none"
+          :class="{ 'is-visible': visualReveal.isVisible }"
+          style="--reveal-delay: 180ms"
           aria-hidden="true"
         >
           <div class="absolute inset-0 rounded-3xl border border-[var(--border)] bg-white/40 backdrop-blur-sm" />
@@ -77,11 +95,11 @@
               background-size: 32px 32px;
             "
           />
-          <div class="absolute left-1/4 top-1/4 h-16 w-16 rounded-xl border border-[var(--accent-border)] bg-[var(--accent-bg)]" />
-          <div class="absolute right-1/4 top-1/3 h-24 w-24 rounded-full border border-[var(--border)] bg-white/80" />
-          <div class="absolute bottom-1/4 left-1/3 h-20 w-20 rotate-45 rounded-lg bg-[var(--text-h)] opacity-[0.08]" />
-          <div class="absolute bottom-1/3 right-1/4 h-3 w-3 rounded-full bg-[var(--accent)]" />
-          <div class="absolute right-1/3 top-1/2 h-2 w-24 rounded-full bg-[var(--accent)] opacity-30" />
+          <div class="hero-shape-float absolute left-1/4 top-1/4 h-16 w-16 rounded-xl border border-[var(--accent-border)] bg-[var(--accent-bg)]" />
+          <div class="hero-shape-pulse absolute right-1/4 top-1/3 h-24 w-24 rounded-full border border-[var(--border)] bg-white/80" />
+          <div class="hero-shape-diamond absolute bottom-1/4 left-1/3 h-20 w-20 rounded-lg bg-[var(--text-h)] opacity-[0.08]" />
+          <div class="hero-shape-float-alt absolute bottom-1/3 right-1/4 h-3 w-3 rounded-full bg-[var(--accent)]" />
+          <div class="hero-shape-float absolute right-1/3 top-1/2 h-2 w-24 rounded-full bg-[var(--accent)] opacity-30" style="animation-delay: -2s" />
         </div>
       </div>
     </div>

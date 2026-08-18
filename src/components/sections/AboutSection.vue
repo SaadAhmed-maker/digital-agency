@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
 interface Stat {
   value: string
   label: string
@@ -9,17 +11,24 @@ const stats: Stat[] = [
   { value: '10+', label: 'Industries' },
   { value: '5', label: 'Years Experience' },
 ]
+
+const textReveal = useScrollReveal()
+const visualReveal = useScrollReveal({ delay: 100 })
 </script>
 
 <template>
   <section
     id="about"
-    class="border-t border-[var(--border)] bg-[var(--accent-bg)]/30"
+    class="w-full border-t border-[var(--border)] bg-[var(--accent-bg)]/30"
   >
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <div class="section-padding section-container">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <!-- Text -->
-        <div>
+        <div
+          :ref="textReveal.target"
+          class="reveal"
+          :class="{ 'is-visible': textReveal.isVisible }"
+        >
           <h2 class="text-3xl font-bold tracking-tight text-[var(--text-h)] sm:text-4xl">
             How we work
           </h2>
@@ -54,7 +63,9 @@ const stats: Stat[] = [
 
         <!-- Visual placeholder -->
         <div
-          class="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-[var(--border)] bg-white/50 lg:aspect-square"
+          :ref="visualReveal.target"
+          class="reveal relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-[var(--border)] bg-white/50 lg:aspect-square"
+          :class="{ 'is-visible': visualReveal.isVisible }"
           aria-hidden="true"
         >
           <div

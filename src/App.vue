@@ -7,7 +7,7 @@ import FooterSection from './components/sections/FooterSection.vue'
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col pt-[4.5rem]">
+  <div class="flex min-h-screen w-full flex-col pt-[4.5rem]">
     <HeaderNav />
     <HeroSection />
     <ServicesSection />

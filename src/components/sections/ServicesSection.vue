@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
 interface Service {
   title: string
   description: string
@@ -31,15 +33,22 @@ const services: Service[] = [
     icon: 'branding',
   },
 ]
+
+const headerReveal = useScrollReveal()
+const cardsReveal = useScrollReveal()
 </script>
 
 <template>
   <section
     id="services"
-    class="border-t border-[var(--border)] bg-white"
+    class="w-full border-t border-[var(--border)] bg-white"
   >
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-      <header class="mx-auto max-w-2xl text-center">
+    <div class="section-padding section-container">
+      <header
+        :ref="headerReveal.target"
+        class="reveal mx-auto max-w-2xl text-center"
+        :class="{ 'is-visible': headerReveal.isVisible }"
+      >
         <h2 class="text-3xl font-bold tracking-tight text-[var(--text-h)] sm:text-4xl">
           What we do
         </h2>
@@ -48,13 +57,22 @@ const services: Service[] = [
         </p>
       </header>
 
-      <ul class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <li v-for="service in services" :key="service.title">
+      <ul
+        :ref="cardsReveal.target"
+        class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4"
+      >
+        <li
+          v-for="(service, index) in services"
+          :key="service.title"
+          class="reveal"
+          :class="{ 'is-visible': cardsReveal.isVisible }"
+          :style="{ '--reveal-delay': `${index * 90}ms` }"
+        >
           <article
-            class="group h-full rounded-2xl border border-[var(--border)] bg-white p-6 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-border)] hover:shadow-sm"
+            class="service-card group h-full rounded-2xl border border-[var(--border)] bg-white p-6 hover:border-[var(--accent-border)]"
           >
             <div
-              class="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--accent-bg)] text-[var(--accent)] transition-colors duration-200 group-hover:border-[var(--accent-border)]"
+              class="interactive flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--accent-bg)] text-[var(--accent)] group-hover:border-[var(--accent-border)]"
               aria-hidden="true"
             >
               <!-- Software & Digital Solutions -->

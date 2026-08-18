@@ -47,20 +47,20 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,box-shadow] duration-300"
+    class="fixed top-0 left-0 right-0 z-50 w-full transition-[background-color,border-color,box-shadow] duration-200 ease-out"
     :class="
       isScrolled
         ? 'bg-white/95 backdrop-blur-md border-b border-[var(--border)] shadow-sm'
         : 'bg-white/80 backdrop-blur-md border-b border-transparent'
     "
   >
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-6 lg:px-8">
+    <div class="section-container flex items-center justify-between gap-4 py-4">
       <!-- Wordmark -->
       <a
-        href="#"
-        class="text-lg font-bold tracking-tight text-[var(--text-h)] transition-colors hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+        href="#hero"
+        class="interactive focus-ring text-lg font-bold tracking-tight text-[var(--text-h)] hover:text-[var(--accent)]"
       >
-        AGENCY
+        Hexaknow
       </a>
 
       <!-- Desktop nav -->
@@ -72,9 +72,9 @@ onUnmounted(() => {
           <li v-for="link in navLinks" :key="link.href">
             <a
               :href="link.href"
-              class="text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              class="interactive focus-ring text-sm font-medium text-[var(--text)] hover:text-[var(--accent)]"
             >
-              <span class="relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-[var(--accent)] after:transition-[width] after:duration-200 hover:after:w-full">
+              <span class="nav-link-underline relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-[var(--accent)] hover:after:w-full">
                 {{ link.label }}
               </span>
             </a>
@@ -85,15 +85,17 @@ onUnmounted(() => {
       <!-- Desktop CTA + mobile toggle -->
       <div class="flex items-center gap-3">
         <a
-          href="#contact"
-          class="hidden rounded-full bg-[var(--text-h)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] lg:inline-block"
+          href="https://wa.me/919821733034"
+          class="btn focus-ring hidden items-center justify-center rounded-full bg-[var(--text-h)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--accent)] lg:inline-flex"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Get in touch
         </a>
 
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--text-h)] transition-colors hover:bg-[var(--accent-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] lg:hidden"
+          class="interactive focus-ring flex h-10 w-10 items-center justify-center rounded-lg text-[var(--text-h)] hover:bg-[var(--accent-bg)] lg:hidden"
           aria-label="Toggle menu"
           :aria-expanded="isMenuOpen"
           @click="toggleMenu"
@@ -147,7 +149,7 @@ onUnmounted(() => {
             <li v-for="link in navLinks" :key="link.href">
               <a
                 :href="link.href"
-                class="block rounded-lg px-3 py-3 text-base font-medium text-[var(--text-h)] transition-colors hover:bg-[var(--accent-bg)] hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                class="interactive focus-ring block rounded-lg px-3 py-3 text-base font-medium text-[var(--text-h)] hover:bg-[var(--accent-bg)] hover:text-[var(--accent)]"
                 @click="closeMenu"
               >
                 {{ link.label }}
@@ -156,8 +158,10 @@ onUnmounted(() => {
           </ul>
 
           <a
-            href="#contact"
-            class="mt-6 rounded-full bg-[var(--text-h)] px-5 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            href="https://wa.me/919821733034"
+            class="btn focus-ring mt-6 inline-flex items-center justify-center rounded-full bg-[var(--text-h)] px-5 py-3 text-center text-sm font-medium text-white hover:bg-[var(--accent)]"
+            target="_blank"
+            rel="noopener noreferrer"
             @click="closeMenu"
           >
             Get in touch
