@@ -1,8 +1,41 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 
 const whatsappSaad = 'https://wa.me/919821733034'
 const visualReveal = useScrollReveal()
+
+// Entrance animation state — defaults to true (fully visible) so that
+// if JS fails to run for any reason, content is still readable.
+// The "not yet revealed" state is only applied briefly, and only if
+// the browser doesn't prefer reduced motion.
+const entranceReady = ref(true)
+
+onMounted(() => {
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches
+
+  if (prefersReducedMotion) {
+    entranceReady.value = true
+    return
+  }
+
+  // Start hidden, then reveal on next frame so the transition actually runs.
+  entranceReady.value = false
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      entranceReady.value = true
+    })
+  })
+
+  // Safety net: no matter what happens above, guarantee full visibility
+  // within 1.2s. This prevents the "stuck at partial opacity" bug seen
+  // on mobile — content can never remain unreadable.
+  setTimeout(() => {
+    entranceReady.value = true
+  }, 1200)
+})
 </script>
 
 <template>
@@ -39,8 +72,9 @@ const visualReveal = useScrollReveal()
         <!-- Content -->
         <div class="text-center lg:text-left">
           <h1
-            class="hero-entrance text-4xl font-bold leading-[1.1] tracking-tight text-[var(--text-h)] sm:text-5xl lg:text-6xl xl:text-7xl"
-            style="--hero-delay: 0ms"
+            class="text-4xl font-bold leading-[1.1] tracking-tight text-[var(--text-h)] transition-all duration-700 ease-out sm:text-5xl lg:text-6xl xl:text-7xl"
+            :class="entranceReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            style="transition-delay: 0ms"
           >
             <span class="font-extrabold">Build.</span>
             <span class="font-medium text-[var(--text)]"> Grow.</span>
@@ -48,8 +82,9 @@ const visualReveal = useScrollReveal()
           </h1>
 
           <p
-            class="hero-entrance mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--text)] sm:text-lg lg:mx-0"
-            style="--hero-delay: 120ms"
+            class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--text)] transition-all duration-700 ease-out sm:text-lg lg:mx-0"
+            :class="entranceReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            style="transition-delay: 120ms"
           >
             We help businesses ship software, harness AI and automation,
             scale digital marketing, and build brands that stand out —
@@ -57,8 +92,9 @@ const visualReveal = useScrollReveal()
           </p>
 
           <div
-            class="hero-entrance mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
-            style="--hero-delay: 240ms"
+            class="mt-10 flex flex-col items-center gap-4 transition-all duration-700 ease-out sm:flex-row sm:justify-center lg:justify-start"
+            :class="entranceReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            style="transition-delay: 240ms"
           >
             <a
               :href="whatsappSaad"
